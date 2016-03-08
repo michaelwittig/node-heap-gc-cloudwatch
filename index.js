@@ -12,15 +12,16 @@ var HEAP_STATISTICS = ["total_heap_size", "total_heap_size_executable", "total_p
 var HEAP_SPACE_STATISTICS = ["space_size", "space_used_size", "space_available_size", "physical_space_size"];
 var NAMESPACE = "node";
 
-module.exports = function(params, cb) {
+module.exports = function(config, cb) {
   "use strict";
-  var collectInterval = params.collectInterval || COLLECT_INTERVAL;
-  var writeInterval = params.writeInterval || WRITE_INTERVAL;
-  var heapStatistics = params.heapStatistics || HEAP_STATISTICS;
-  var heapSpaceStatistics = params.heapSpaceStatistics || HEAP_SPACE_STATISTICS;
-  var cloudwatch = params.cloudwatch || new AWS.CloudWatch();
-  var namespace = params.namespace || NAMESPACE;
-  var customDimensions = merge({}, params.dimensions) || {};
+  config = config || {};
+  var collectInterval = config.collectInterval || COLLECT_INTERVAL;
+  var writeInterval = config.writeInterval || WRITE_INTERVAL;
+  var heapStatistics = config.heapStatistics || HEAP_STATISTICS;
+  var heapSpaceStatistics = config.heapSpaceStatistics || HEAP_SPACE_STATISTICS;
+  var cloudwatch = config.cloudwatch || new AWS.CloudWatch();
+  var namespace = config.namespace || NAMESPACE;
+  var customDimensions = merge({}, config.dimensions) || {};
 
   var emitter = new EventEmitter();
   var collectIntervalObject;
@@ -180,10 +181,10 @@ module.exports = function(params, cb) {
     cb(null, emitter);
   }
 
-  if (params.addProcessIdDimension === true) {
+  if (config.addProcessIdDimension === true) {
     customDimensions.ProcessId = process.pid;
   }
-  if (params.addInstanceIdDimension === true) {
+  if (config.addInstanceIdDimension === true) {
     ec2metadata("instance-id", function(err, id) {
       if (err) {
         cb(err);
