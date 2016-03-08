@@ -137,15 +137,31 @@ module.exports = function(params, cb) {
 
   function collectGC(stats) {
     emitter.emit("collectGC");
-    report({}, "total_heap_size", stats.before.totalHeapSize, "Bytes");
-    report({}, "total_heap_size_executable", stats.before.totalHeapExecutableSize, "Bytes");
-    report({}, "used_heap_size", stats.before.usedHeapSize, "Bytes");
-    report({}, "heap_size_limit", stats.before.heapSizeLimit, "Bytes");
+    if (heapStatistics.indexOf("total_heap_size") !== -1) {
+      report({}, "total_heap_size", stats.before.totalHeapSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("total_heap_size_executable") !== -1) {
+      report({}, "total_heap_size_executable", stats.before.totalHeapExecutableSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("used_heap_size") !== -1) {
+      report({}, "used_heap_size", stats.before.usedHeapSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("heap_size_limit") !== -1) {
+      report({}, "heap_size_limit", stats.before.heapSizeLimit, "Bytes");
+    }
     report({"Type": gcType2String(stats.gctype)}, "gc_pause", stats.pause / 1000, "Microseconds");
-    report({}, "total_heap_size", stats.after.totalHeapSize, "Bytes");
-    report({}, "total_heap_size_executable", stats.after.totalHeapExecutableSize, "Bytes");
-    report({}, "used_heap_size", stats.after.usedHeapSize, "Bytes");
-    report({}, "heap_size_limit", stats.after.heapSizeLimit, "Bytes");
+    if (heapStatistics.indexOf("total_heap_size") !== -1) {
+      report({}, "total_heap_size", stats.after.totalHeapSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("total_heap_size_executable") !== -1) {
+      report({}, "total_heap_size_executable", stats.after.totalHeapExecutableSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("used_heap_size") !== -1) {
+      report({}, "used_heap_size", stats.after.usedHeapSize, "Bytes");
+    }
+    if (heapStatistics.indexOf("heap_size_limit") !== -1) {
+      report({}, "heap_size_limit", stats.after.heapSizeLimit, "Bytes");
+    }
   }
 
   function setup() {
