@@ -20,7 +20,7 @@ module.exports = function(params, cb) {
   var heapSpaceStatistics = params.heapSpaceStatistics || HEAP_SPACE_STATISTICS;
   var cloudwatch = params.cloudwatch || new AWS.CloudWatch();
   var namespace = params.namespace || NAMESPACE;
-  var customDimensions = params.dimensions || {};
+  var customDimensions = merge({}, params.dimensions) || {};
 
   var emitter = new EventEmitter();
   var collectIntervalObject;
@@ -33,7 +33,7 @@ module.exports = function(params, cb) {
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         var d = data[key];
-        var dimensions = merge(customDimensions, d.additionalDimensions);
+        var dimensions = merge({}, customDimensions, d.additionalDimensions);
         var metricDimensions = [];
         for (var name in dimensions) {
           if (dimensions.hasOwnProperty(name)) {
