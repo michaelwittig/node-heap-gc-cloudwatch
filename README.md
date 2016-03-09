@@ -6,6 +6,8 @@
 
 Send v8 heap statistics and garbage collection statistics to CloudWatch.
 
+![CloudWatch heap space used size graph](./graph.png?raw=true "CloudWatch heap space used size graph")
+
 ## Getting started
 
 Install the module:
