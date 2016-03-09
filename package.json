@@ -1,6 +1,6 @@
 {
   "name": "node-heap-gc-cloudwatch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Report v8 heap usage and gc activity to CloudWatch",
   "keywords": ["heap", "gc", "v8", "CloudWatch"],
   "main": "index.js",
@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "gc-stats": "1.0.0",
+    "neo-async": "1.7.4",
     "aws-sdk": "2.2.41",
     "merge": "1.2.0",
     "ec2-metadata": "1.0.1"

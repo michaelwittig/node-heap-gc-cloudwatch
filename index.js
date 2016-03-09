@@ -2,6 +2,7 @@ var v8 = require("v8");
 var EventEmitter =  require("events");
 
 var AWS = require("aws-sdk");
+var async = require("neo-async");
 var merge = require("merge");
 var ec2metadata = require("ec2-metadata");
 var gc = require("gc-stats")();
@@ -11,6 +12,15 @@ var WRITE_INTERVAL = 60000;
 var HEAP_STATISTICS = ["total_heap_size", "total_heap_size_executable", "total_physical_size", "total_available_size", "used_heap_size", "heap_size_limit"];
 var HEAP_SPACE_STATISTICS = ["space_size", "space_used_size", "space_available_size", "physical_space_size"];
 var NAMESPACE = "node";
+
+function chunk(arr, n) {
+  "use strict";
+  var i, j, temparray = [], chunk = n;
+  for (i = 0, j = arr.length; i < j; i += chunk) {
+    temparray.push(arr.slice(i, i + chunk));
+  }
+  return temparray;
+}
 
 module.exports = function(config, cb) {
   "use strict";
@@ -57,11 +67,13 @@ module.exports = function(config, cb) {
       }
     }
     data = {};
-    var params = {
-      MetricData: metricData,
-      Namespace: namespace
-    };
-    cloudwatch.putMetricData(params, cb);
+    async.eachLimit(chunk(metricData, 10), 2, function(metricDataJunk, cb) {
+      var params = {
+        MetricData: metricDataJunk,
+        Namespace: namespace
+      };
+      cloudwatch.putMetricData(params, cb);
+    }, cb);
   }
 
   function wrappedWrite() {

@@ -38,6 +38,8 @@ require("node-heap-gc-cloudwatch")(config, function(err, agent) {
 
 After ~1 minute you will see the first metrics in CloudWatch under the `node` name space.
 
+Make sure to allow the `cloudwatch:PutMetricData` Action in your IAM policy.
+
 ## Configuration
 
 * `collectInterval`: Number - Collect new heap statistics every `collectInterval` ms (default `1000`)
