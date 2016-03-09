@@ -19,7 +19,6 @@ In your app, create and start an agent:
 ```javascript
 var config = {};
 require("node-heap-gc-cloudwatch")(config, function(err, agent) {
-  "use strict";
   if (err) {
     throw err;
   } else {
@@ -27,7 +26,11 @@ require("node-heap-gc-cloudwatch")(config, function(err, agent) {
       console.log("error", err);
     });
     agent.start(function(err) {
-      console.log("started");
+      if (err) {
+        throw err;
+      } else {
+        console.log("started");
+      }
     });
   }
 });

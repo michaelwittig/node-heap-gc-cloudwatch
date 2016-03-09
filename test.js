@@ -19,7 +19,11 @@ require("./index.js")({
       console.log("error", err);
     });
     agent.start(function(err) {
-      console.log("started");
+      if (err) {
+        throw err;
+      } else {
+        console.log("started");
+      }
     });
   }
 });
