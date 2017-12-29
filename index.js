@@ -4,7 +4,6 @@ var EventEmitter =  require("events");
 var AWS = require("aws-sdk");
 var async = require("neo-async");
 var merge = require("merge");
-var ec2metadata = require("ec2-metadata");
 var gc = require("gc-stats")();
 
 var COLLECT_INTERVAL = 1000;
@@ -197,7 +196,8 @@ module.exports = function(config, cb) {
     customDimensions.ProcessId = process.pid;
   }
   if (config.addInstanceIdDimension === true) {
-    ec2metadata("instance-id", function(err, id) {
+    var metdata = new AWS.MetadataService();
+    metdata.request("/latest/meta-data/instance-id", function(err, id) {
       if (err) {
         cb(err);
       } else {
