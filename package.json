@@ -32,6 +32,6 @@
     "url": "https://github.com/michaelwittig/node-heap-gc-cloudwatch.git"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=8"
   }
 }
