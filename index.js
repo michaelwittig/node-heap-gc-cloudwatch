@@ -140,10 +140,13 @@ module.exports = function(config, cb) {
       return "minor";
     } else if (gctype === 2) {
       return "major";
-    } else if (gctype === 3) {
-      return "full";
+    } else if (gctype === 4) {
+      return "incremental";
+    } else if (gctype === 8) {
+      return "weakcallbacks";
     } else {
-      throw new Error("unsupported gctype: " + gctype);
+      emitter.emit("error", new Error("unsupported gctype: " + gctype));
+      return "unknown";
     }
   }
 
@@ -196,8 +199,8 @@ module.exports = function(config, cb) {
     customDimensions.ProcessId = process.pid;
   }
   if (config.addInstanceIdDimension === true) {
-    var metdata = new AWS.MetadataService();
-    metdata.request("/latest/meta-data/instance-id", function(err, id) {
+    var metadata = new AWS.MetadataService();
+    metadata.request("/latest/meta-data/instance-id", function(err, id) {
       if (err) {
         cb(err);
       } else {
