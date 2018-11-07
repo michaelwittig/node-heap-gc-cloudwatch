@@ -171,6 +171,14 @@ module.exports = function(config, cb) {
     if (heapStatistics.indexOf("total_heap_size_executable") !== -1) {
       report({}, "total_heap_size_executable", stats.after.totalHeapExecutableSize, "Bytes");
     }
+    // only available in node 0.11+
+    if (heapStatistics.indexOf("total_physical_size") !== -1 && stats.after.hasOwnProperty("totalPhysicalSize")) {
+      report({}, "total_physical_size", stats.after.totalPhysicalSize, "Bytes");
+    }
+    // only available in node 4+
+    if (heapStatistics.indexOf("total_available_size") !== -1 && stats.after.hasOwnProperty("totalAvailableSize")) {
+      report({}, "total_available_size", stats.after.totalAvailableSize, "Bytes");
+    }
     if (heapStatistics.indexOf("used_heap_size") !== -1) {
       report({}, "used_heap_size", stats.after.usedHeapSize, "Bytes");
     }
