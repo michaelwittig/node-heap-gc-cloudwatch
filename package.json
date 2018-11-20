@@ -15,24 +15,23 @@
   "author": "Michael Wittig <post@michaelwittig.info>",
   "license": "MIT",
   "dependencies": {
-    "gc-stats": "1.0.0",
-    "neo-async": "2.5.0",
-    "aws-sdk": "2.175.0",
-    "merge": "1.2.0"
+    "aws-sdk": "^2.348.0",
+    "gc-stats": "^1.2.0",
+    "merge": "^1.2.1",
+    "neo-async": "^2.6.0"
   },
   "devDependencies": {
-    "mocha": "4.0.1",
-    "jshint": "2.9.5",
-    "madge": "2.2.0",
-    "npmedge": "0.2.2",
-    "moment": "2.20.1",
-    "istanbul": "0.4.5"
+    "istanbul": "0.4.5",
+    "jshint": "^2.9.6",
+    "madge": "^3.3.0",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/michaelwittig/node-heap-gc-cloudwatch.git"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=8"
   }
 }
