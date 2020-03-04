@@ -208,8 +208,8 @@ module.exports = function(config, cb) {
 
   function setup() {
     emitter.start = function(cb) {
-      var collectIntervalObject = setInterval(collect, collectInterval);
-      var writeIntervalObject = setInterval(wrappedWrite, writeInterval);
+      collectIntervalObject = setInterval(collect, collectInterval);
+      writeIntervalObject = setInterval(wrappedWrite, writeInterval);
       gc.on("stats", collectGC);
       cb();
     };
