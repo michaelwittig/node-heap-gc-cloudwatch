@@ -21,6 +21,25 @@ function chunk(arr, n) {
   return temparray;
 }
 
+/**
+ *
+ * @param config
+ * @param {Number} [config.collectInterval=1000] Collect new heap statistics every collectInterval ms
+ * @param {Number} [config.writeInterval=60000] Send metric to CloudWatch every writeInterval ms
+ * @param {Array<String>} [config.heapStatistics=["total_heap_size","total_heap_size_executable","total_physical_size","total_available_size","used_heap_size","heap_size_limit"]]
+ * Values to report to CloudWatch from v8.getHeapStatistics()
+ * @param {Array<String>} [config.heapSpaceStatistics=["space_size","space_used_size","space_available_size","physical_space_size"]]
+ * Values to report to CloudWatch from v8.getHeapSpaceStatistics()
+ * @param {AWS.CloudWatch} [config.cloudwatch=new AWS.CloudWatch()] CloudWatch service object
+ * @param {String} [config.namespace=node] The namespace for the metric data
+ * @param {Object<String, String>} [config.dimensions={}] - Add additional dimensions like {Application: "webshop",
+ * Environment: "production"}
+ * @param {Boolean} [config.addProcessIdDimension=false] - If true, adds the ProcessId dimension with the value of
+ * process.pid
+ * @param {Boolean} [config.addInstanceIdDimension=false] - If true, adds the InstanceId dimension with the value of the
+ * EC2 instance id
+ * @param {Function} cb
+ */
 module.exports = function(config, cb) {
   "use strict";
   config = config || {};
