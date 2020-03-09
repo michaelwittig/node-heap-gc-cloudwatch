@@ -1,6 +1,6 @@
 {
   "name": "node-heap-gc-cloudwatch",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Report v8 heap usage and gc activity to CloudWatch",
   "keywords": [
     "heap",
@@ -15,16 +15,15 @@
   "author": "Michael Wittig <post@michaelwittig.info>",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.632.0",
-    "gc-stats": "^1.4.0",
+    "aws-sdk": "2.635.0",
+    "gc-stats": "1.4.0",
     "merge": "1.2.1",
-    "neo-async": "^2.6.1"
+    "neo-async": "2.6.1"
   },
   "devDependencies": {
-    "istanbul": "0.4.5",
-    "jshint": "^2.11.0",
-    "madge": "^3.7.0",
-    "mocha": "^7.1.0"
+    "jshint": "2.11.0",
+    "madge": "3.7.0",
+    "mocha": "7.1.0"
   },
   "repository": {
     "type": "git",
