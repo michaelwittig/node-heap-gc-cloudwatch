@@ -38,6 +38,7 @@ function chunk(arr, n) {
  * process.pid
  * @param {Boolean} [config.addInstanceIdDimension=false] - If true, adds the InstanceId dimension with the value of the
  * EC2 instance id
+ * @param {Boolean} [config.omitGCPauseMetrics=false] - If true, omit the gc_pause metrics
  * @param {Function} cb
  */
 module.exports = function(config, cb) {
@@ -183,7 +184,9 @@ module.exports = function(config, cb) {
     if (heapStatistics.indexOf("heap_size_limit") !== -1) {
       report({}, "heap_size_limit", stats.before.heapSizeLimit, "Bytes");
     }
-    report({"Type": gcType2String(stats.gctype)}, "gc_pause", stats.pause / 1000, "Microseconds");
+    if (config.omitGCPauseMetrics !== true) {
+      report({"Type": gcType2String(stats.gctype)}, "gc_pause", stats.pause / 1000, "Microseconds");
+    }
     if (heapStatistics.indexOf("total_heap_size") !== -1) {
       report({}, "total_heap_size", stats.after.totalHeapSize, "Bytes");
     }

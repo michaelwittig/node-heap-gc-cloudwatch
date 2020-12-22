@@ -54,6 +54,7 @@ Make sure to allow the `cloudwatch:PutMetricData` Action in your IAM policy.
 * `dimensions`: Object[String, String] - Add additional dimensions like `{Application: "webshop", Environment: "production"}`. (default `{}`)
 * `addProcessIdDimension`: Boolean - If true, adds the `ProcessId` dimension with the value of `process.pid` (default `false`)
 * `addInstanceIdDimension`: Boolean -  If true, adds the `InstanceId` dimension with the value of the EC2 instance id (default `false`)
+* `omitGCPauseMetrics`: Boolean -  If true, omits the `gc_pause` metrics (default `false`)
 
 **Important**
 
