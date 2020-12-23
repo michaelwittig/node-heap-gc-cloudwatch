@@ -1,6 +1,6 @@
 {
   "name": "node-heap-gc-cloudwatch",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Report v8 heap usage and gc activity to CloudWatch",
   "keywords": [
     "heap",
