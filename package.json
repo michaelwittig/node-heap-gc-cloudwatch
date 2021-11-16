@@ -15,7 +15,7 @@
   "author": "Michael Wittig <post@michaelwittig.info>",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "2.635.0",
+    "aws-sdk": "2.814.0",
     "gc-stats": "1.4.0",
     "merge": "1.2.1",
     "neo-async": "2.6.1"
